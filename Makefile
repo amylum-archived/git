@@ -24,6 +24,12 @@ ZLIB_TAR = /tmp/zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
 ZLIB_PATH = -I$(ZLIB_DIR)/usr/include -L$(ZLIB_DIR)/usr/lib
 
+CURL_VERSION = 7.45.0-1
+CURL_URL = https://github.com/amylum/curl/releases/download/$(CURL_VERSION)/curl.tar.gz
+CURL_TAR = /tmp/curl.tar.gz
+CURL_DIR = /tmp/curl
+CURL_PATH = -I$(CURL_DIR)/usr/include -L$(CURL_DIR)/usr/lib
+
 .PHONY : default submodule deps manual container deps build version push local
 
 default: submodule container
@@ -46,11 +52,15 @@ deps:
 	mkdir $(ZLIB_DIR)
 	curl -sLo $(ZLIB_TAR) $(ZLIB_URL)
 	tar -x -C $(ZLIB_DIR) -f $(ZLIB_TAR)
+	rm -rf $(CURL_DIR) $(CURL_TAR)
+	mkdir $(CURL_DIR)
+	curl -sLo $(CURL_TAR) $(CURL_URL)
+	tar -x -C $(CURL_DIR) -f $(CURL_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
-	cd $(BUILD_DIR) && make CC=musl-gcc CFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH)' $(PATH_FLAGS) $(CONF_FLAGS) all doc
+	cd $(BUILD_DIR) && make CC=musl-gcc CFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH) $(CURL_PATH)' $(PATH_FLAGS) $(CONF_FLAGS) all doc
 	cd $(BUILD_DIR) && make $(PATH_FLAGS) DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
