@@ -7,6 +7,7 @@ RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = prefix=/usr gitexecdir=/usr/lib/git-core
 CONF_FLAGS =
 CFLAGS = -static -static-libgcc -Wl,-static
+LIBS= -lssl -lcrypto -lz
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
@@ -60,7 +61,7 @@ deps:
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
-	cd $(BUILD_DIR) && make CC=musl-gcc CFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH) $(CURL_PATH)' $(PATH_FLAGS) $(CONF_FLAGS) all doc
+	cd $(BUILD_DIR) && make CC=musl-gcc CFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH) $(CURL_PATH)' $(PATH_FLAGS) LIBS='$(LIBS)' $(CONF_FLAGS) all doc
 	cd $(BUILD_DIR) && make $(PATH_FLAGS) DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
