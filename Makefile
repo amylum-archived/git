@@ -5,9 +5,7 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = prefix=/usr gitexecdir=/usr/lib/git-core
-CONF_FLAGS =
-CFLAGS = -static -static-libgcc -Wl,-static
-LIBS= -lssl -lcrypto -lz
+CONF_FLAGS = NO_TCLTK=1 NO_PYTHON=1 NO_EXPAT=1 NO_GETTEXT=1
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
@@ -17,19 +15,20 @@ OPENSSL_VERSION = 1.0.2d-1
 OPENSSL_URL = https://github.com/amylum/openssl/releases/download/$(OPENSSL_VERSION)/openssl.tar.gz
 OPENSSL_TAR = /tmp/openssl.tar.gz
 OPENSSL_DIR = /tmp/openssl
-OPENSSL_PATH = -I$(OPENSSL_DIR)/usr/include -L$(OPENSSL_DIR)/usr/lib
 
 ZLIB_VERSION = 1.2.8-1
 ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
 ZLIB_TAR = /tmp/zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
-ZLIB_PATH = -I$(ZLIB_DIR)/usr/include -L$(ZLIB_DIR)/usr/lib
 
 CURL_VERSION = 7.45.0-1
 CURL_URL = https://github.com/amylum/curl/releases/download/$(CURL_VERSION)/curl.tar.gz
 CURL_TAR = /tmp/curl.tar.gz
 CURL_DIR = /tmp/curl
-CURL_PATH = -I$(CURL_DIR)/usr/include -L$(CURL_DIR)/usr/lib
+
+CFLAGS = -I$(CURL_DIR)/usr/include -I$(OPENSSL_DIR)/usr/include -I$(ZLIB_DIR)/usr/include
+LDFLAGS = -L$(CURL_DIR)/usr/lib -L$(OPENSSL_DIR)/usr/lib -L$(ZLIB_DIR)/usr/lib -static
+LIB_PATH = $(CURL_DIR)/usr/lib/libcurl.a $(OPENSSL_DIR)/usr/lib/libssl.a $(OPENSSL_DIR)/usr/lib/libcrypto.a
 
 .PHONY : default submodule deps manual container deps build version push local
 
@@ -61,9 +60,7 @@ deps:
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
-	patch -d $(BUILD_DIR) < patches/credential-store-fix.patch
-	cd $(BUILD_DIR) && make CC=musl-gcc CFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH) $(CURL_PATH)' LDFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH) $(CURL_PATH)' LIBS='$(LIBS)' $(PATH_FLAGS) $(CONF_FLAGS) all doc
-	cd $(BUILD_DIR) && make $(PATH_FLAGS) DESTDIR=$(RELEASE_DIR) install
+	cd $(BUILD_DIR) && make CC='musl-gcc -static' CURL_LIBCURL='$(LIB_PATH)' $(PATH_FLAGS) $(CONF_FLAGS) CFLAGS='$(CFLAGS)' LDFLAGS='$(LDFLAGS)' DESTDIR=$(RELEASE_DIR) all install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
