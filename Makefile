@@ -61,6 +61,7 @@ deps:
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
+	patch -d $(BUILD_DIR) < patches/credential-store-fix.patch
 	cd $(BUILD_DIR) && make CC=musl-gcc CFLAGS='$(CFLAGS) $(OPENSSL_PATH) $(ZLIB_PATH) $(CURL_PATH)' $(PATH_FLAGS) LIBS='$(LIBS)' $(CONF_FLAGS) all doc
 	cd $(BUILD_DIR) && make $(PATH_FLAGS) DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
