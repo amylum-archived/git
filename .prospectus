@@ -1,0 +1,31 @@
+item do
+  expected do
+    url_xpath
+    url 'https://git-scm.com/'
+    xpath '//span[@class="version"]'
+  end
+
+  actual do
+    git_tag
+    regex /^(.*)-\d+$/
+  end
+
+  deps do
+    %w(openssl zlib curl).each do |dep|
+      item do
+        name dep
+
+        expected do
+          github_release
+          repo "amylum/#{dep}"
+        end
+
+        actual do
+          grep
+          file 'Makefile'
+          regex /^#{dep.upcase}_VERSION = ([\w.-]+)$/
+        end
+      end
+    end
+  end
+end
