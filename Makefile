@@ -21,7 +21,7 @@ ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib
 ZLIB_TAR = /tmp/zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
 
-CURL_VERSION = 7.45.0-2
+CURL_VERSION = 7.46.0-3
 CURL_URL = https://github.com/amylum/curl/releases/download/$(CURL_VERSION)/curl.tar.gz
 CURL_TAR = /tmp/curl.tar.gz
 CURL_DIR = /tmp/curl
