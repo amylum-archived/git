@@ -11,7 +11,7 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-OPENSSL_VERSION = 1.0.2e-2
+OPENSSL_VERSION = 1.0.2f-3
 OPENSSL_URL = https://github.com/amylum/openssl/releases/download/$(OPENSSL_VERSION)/openssl.tar.gz
 OPENSSL_TAR = /tmp/openssl.tar.gz
 OPENSSL_DIR = /tmp/openssl
