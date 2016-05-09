@@ -60,7 +60,7 @@ deps:
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
-	cd $(BUILD_DIR) && make CC='musl-gcc -static' CURL_LIBCURL='$(LIB_PATH)' $(PATH_FLAGS) $(CONF_FLAGS) CFLAGS='$(CFLAGS)' LDFLAGS='$(LDFLAGS)' DESTDIR=$(RELEASE_DIR) all install
+	cd $(BUILD_DIR) && make CC='musl-gcc' CURL_LIBCURL='$(LIB_PATH)' $(PATH_FLAGS) $(CONF_FLAGS) CFLAGS='$(CFLAGS)' LDFLAGS='$(LDFLAGS)' DESTDIR=$(RELEASE_DIR) all install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
