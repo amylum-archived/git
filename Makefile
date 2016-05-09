@@ -11,23 +11,23 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-OPENSSL_VERSION = 1.0.2g-6
+OPENSSL_VERSION = 1.0.2h-7
 OPENSSL_URL = https://github.com/amylum/openssl/releases/download/$(OPENSSL_VERSION)/openssl.tar.gz
 OPENSSL_TAR = /tmp/openssl.tar.gz
 OPENSSL_DIR = /tmp/openssl
 
-ZLIB_VERSION = 1.2.8-2
+ZLIB_VERSION = 1.2.8-4
 ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
 ZLIB_TAR = /tmp/zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
 
-CURL_VERSION = 7.48.0-10
+CURL_VERSION = 7.48.0-11
 CURL_URL = https://github.com/amylum/curl/releases/download/$(CURL_VERSION)/curl.tar.gz
 CURL_TAR = /tmp/curl.tar.gz
 CURL_DIR = /tmp/curl
 
 CFLAGS = -I$(CURL_DIR)/usr/include -I$(OPENSSL_DIR)/usr/include -I$(ZLIB_DIR)/usr/include
-LDFLAGS = -L$(CURL_DIR)/usr/lib -L$(OPENSSL_DIR)/usr/lib -L$(ZLIB_DIR)/usr/lib -static
+LDFLAGS = -L$(CURL_DIR)/usr/lib -L$(OPENSSL_DIR)/usr/lib -L$(ZLIB_DIR)/usr/lib
 LIB_PATH = $(CURL_DIR)/usr/lib/libcurl.a $(OPENSSL_DIR)/usr/lib/libssl.a $(OPENSSL_DIR)/usr/lib/libcrypto.a
 
 .PHONY : default submodule deps manual container deps build version push local
