@@ -13,7 +13,7 @@ cflags
 harden
 
 build do
-  run('make', 'all', install',
+  run('make', 'all', 'install',
     "DESTDIR=#{releasedir}",
     "CURL_LIBCURL=#{@forge.dep(:curl)}/usr/lib/libcurl.a #{@forge.dep(:openssl)}/usr/lib/libssl.a #{@forge.dep(:openssl)}/usr/lib/libcrypto.a",
     "CFLAGS=#{@forge.cflags.join(' ')}",
