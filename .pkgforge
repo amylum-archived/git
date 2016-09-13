@@ -13,8 +13,6 @@ cflags
 harden
 
 build do
-  run 'autoheader'
-  run 'autoconf'
   run('make all install',
     'DESTDIR' => releasedir,
     'CURL_LIBCURL' => "#{dep(:curl)}/usr/lib/libcurl.a #{dep(:openssl)}/usr/lib/libssl.a #{dep(:openssl)}/usr/lib/libcrypto.a",
