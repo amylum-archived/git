@@ -15,7 +15,7 @@ harden
 build do
   run('make all install',
     'DESTDIR' => releasedir,
-    'CURL_LIBCURL' => "#{dep(:curl)}/usr/lib/libcurl.a #{dep(:openssl)}/usr/lib/libssl.a #{dep(:openssl)}/usr/lib/libcrypto.a",
+    'CURL_LIBCURL' => "#{@forge.dep(:curl)}/usr/lib/libcurl.a #{@forge.dep(:openssl)}/usr/lib/libssl.a #{@forge.dep(:openssl)}/usr/lib/libcrypto.a",
     'LDFLAGS' => @forge.cflags.join(' '),
     'NO_TCLTK' => '1',
     'NO_PYTHON' => '1',
