@@ -13,16 +13,17 @@ cflags
 harden
 
 build do
-  run('make all install',
-    'DESTDIR' => releasedir,
-    'CURL_LIBCURL' => "#{@forge.dep(:curl)}/usr/lib/libcurl.a #{@forge.dep(:openssl)}/usr/lib/libssl.a #{@forge.dep(:openssl)}/usr/lib/libcrypto.a",
-    'LDFLAGS' => @forge.cflags.join(' '),
-    'NO_TCLTK' => '1',
-    'NO_PYTHON' => '1',
-    'NO_EXPAT' => '1',
-    'NO_GETTEXT' => '1',
-    'prefix' => '/usr',
-    'gitexecdir' => '/usr/lib/git-core'
+  run('make', 'all', install',
+    "DESTDIR=#{releasedir}",
+    "CURL_LIBCURL=#{@forge.dep(:curl)}/usr/lib/libcurl.a #{@forge.dep(:openssl)}/usr/lib/libssl.a #{@forge.dep(:openssl)}/usr/lib/libcrypto.a",
+    "CFLAGS=#{@forge.cflags.join(' ')}",
+    "LDFLAGS=#{@forge.cflags.join(' ')}",
+    'NO_TCLTK=1',
+    'NO_PYTHON=1',
+    'NO_EXPAT=1',
+    'NO_GETTEXT=1',
+    'prefix=/usr',
+    'gitexecdir=/usr/lib/git-core'
   )
 end
 
