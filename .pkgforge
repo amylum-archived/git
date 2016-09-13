@@ -12,8 +12,6 @@ deps(
 cflags
 harden
 
-patch 'ssl_dir.patch'
-
 build do
   run 'autoheader'
   run 'autoconf'
