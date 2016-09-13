@@ -1,6 +1,8 @@
 git
 ==========
 
+[![Build Status](https://img.shields.io/circleci/project/amylum/git.svg)](https://circleci.com/gh/amylum/git)
+[![GitHub release](https://img.shields.io/github/release/amylum/git.svg)](https://github.com/amylum/git/releases)
 [![GPL2 Licensed](http://img.shields.io/badge/license-GPL2-green.svg)](https://tldrlegal.com/license/gnu-general-public-license-v2)
 
 Package repo for [git](http://git-scm.com/)

@@ -1,0 +1,35 @@
+name 'git'
+org 'amylum'
+
+licenses 'COPYING'
+
+deps(
+  zlib: '1.2.8-4',
+  openssl: '1.0.2h-7'
+  curl: '7.50.1-15'
+)
+
+cflags
+harden
+
+patch 'ssl_dir.patch'
+
+build do
+  run 'autoheader'
+  run 'autoconf'
+  run('make all install',
+    'DESTDIR' => releasedir,
+    'CURL_LIBCURL' => "#{dep(:curl)}/usr/lib/libcurl.a #{dep(:openssl)}/usr/lib/libssl.a #{dep(:openssl)}/usr/lib/libcrypto.a",
+    'LDFLAGS' => @forge.cflags.join(' '),
+    'NO_TCLTK' => '1',
+    'NO_PYTHON' => '1',
+    'NO_EXPAT' => '1',
+    'NO_GETTEXT' => '1',
+    'prefix' => '/usr',
+    'gitexecdir' => '/usr/lib/git-core'
+  )
+end
+
+test do
+  run 'git --version'
+end
