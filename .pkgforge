@@ -23,6 +23,7 @@ build do
     'NO_PYTHON=1',
     'NO_EXPAT=1',
     'NO_GETTEXT=1',
+    'NO_REGEX=1',
     'prefix=/usr',
     'gitexecdir=/usr/lib/git-core'
   ])
