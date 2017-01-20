@@ -4,9 +4,9 @@ org 'amylum'
 licenses 'COPYING'
 
 deps(
-  zlib: '1.2.10-1',
-  openssl: '1.0.2j-3',
-  curl: '7.52.1-3'
+  zlib: '1.2.11-1',
+  openssl: '1.0.2j-4',
+  curl: '7.52.1-4'
 )
 
 cflags
