@@ -1,0 +1,17 @@
+sudo: required
+dist: trusty
+services:
+- docker
+env:
+  global:
+  - PKGFORGE_STATEFILE=/tmp/pkgforge
+script: make
+deploy:
+  provider: script
+  script: make release || travis_terminate 1
+  skip_cleanup: true
+  on:
+    tags: true
+notifications:
+  slack:
+    secure: NPpEzqCrYLeMQvScPFb3GRqnE08G6SM9g3AWz4QPAzhG3/qKSyL7w77QVqNlTH8Sb118fB2VkA/FoT0WBaNyj+eGYNt1WF8J6/6nZiJ5P5CiUdJIo8Vzqx3H94vi8q8wBjP1XZatQ0ANk0GW5iTFDqyLVuEudO3yd5EtczelDgfDt0d+WLvZOKM2KWcWJGYY5aMjeDqXq47DZyLoNaB5TlLcw+kziUirRXB4EOKArTiyDyFT5jzwlPn6dLOfw4PnXBOGb3CEa+5h5WPdUlu68I84A3hC9wGM6Jo6MjEt+XQzcGGqg+UDuSfZXYkv92smneX2+WN4SfQizCDw6TXzTKptXWcSy4DggQV8IMTVkonGPulDM2XJcprgvNk3/jqSZvVUF9sg4wmo6CveWDlRU9gbevATmS/Gun1VuyxsI1GRptFQpG+gzBcfNeWUZ5XmdnWt2DcdyWUkDaNS9Me2TdtB+pD4Gc5UqVqfwaxgZXsiRVjw6AvCLjeoQKHAej5Y21k1d3x2eCz+oHQyae/PVthP2/seU/UJdz9seTHwEQazpC0zqhXt00JdoI3u9uQiJ+BB2MnDuQl6kI+HRkCB27i+4U/2mJg3lq7frlSecCvHYK4P4AA1MK11lFPGDSesLtIln0RQv7xMrCB2a893Ba5hyRyUTIpPpPxS4NzoFZw=
