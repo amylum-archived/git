@@ -5,16 +5,16 @@ licenses 'COPYING'
 
 deps(
   zlib: {
-    version: '1.2.11-1',
-    checksum: '5596e2d39ef98e2323ac415f50afa71a433ed65c23e8d1f2723f711f5ffb4f32'
+    version: '1.2.11-6',
+    checksum: '7da7212123edac6d5d5dc2db8fb10a6af06472578840c51e489e1f391b66c208'
   },
   openssl: {
     version: '1.1.0i-1',
     checksum: '62004bc61c94107134eb16fdb405b36df2246f303bcd58f5d7df87025a6d7804'
   },
   curl: {
-    version: '7.61.0-2',
-    checksum: '342f27bc7b6136f5d4f6d5ee4922e049ff75915ad66b91c4364d0408b6e3a59f'
+    version: '7.61.0-3',
+    checksum: '7cb457d05dbd0be0ff808852cd43a956683882270ea767581f86b6c543b1f66e'
   }
 )
 
