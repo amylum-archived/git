@@ -13,8 +13,8 @@ deps(
     checksum: 'bdfcd530e741ab1e20e3996463847a851e7ecdb509b7cb227218fb6e96eb0cac'
   },
   curl: {
-    version: '7.61.1-1',
-    checksum: 'b860953542cb240478558e2223b205f0a1e600321be75b1740720d1fba83a150'
+    version: '7.61.1-2',
+    checksum: '8c9f1f337a456d77c67f62d163c71421966b425ac9574030e4ac7dfb65db8a1e'
   }
 )
 
