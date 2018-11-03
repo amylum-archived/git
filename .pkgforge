@@ -9,12 +9,12 @@ deps(
     checksum: '7da7212123edac6d5d5dc2db8fb10a6af06472578840c51e489e1f391b66c208'
   },
   openssl: {
-    version: '1.1.0i-2',
-    checksum: 'bdfcd530e741ab1e20e3996463847a851e7ecdb509b7cb227218fb6e96eb0cac'
+    version: '1.1.0i-3',
+    checksum: '12cf164859e31f433bfe8ae1533e700cd98dc90f0138e7af202d77db9ad83996'
   },
   curl: {
-    version: '7.61.1-2',
-    checksum: '8c9f1f337a456d77c67f62d163c71421966b425ac9574030e4ac7dfb65db8a1e'
+    version: '7.62.0-1',
+    checksum: 'bd7c8a90c577d22dfbee5b187b3c30028efbe1ea6d40328ba3a21c32f2422e16'
   }
 )
 
